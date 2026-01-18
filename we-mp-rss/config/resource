@@ -1,0 +1,38 @@
+{
+    "docker-project":
+    {
+        "projects":
+        [
+            {
+                "name": "we-mp-rss",
+                "path": "docker"
+            }
+        ]
+    },
+    "data-share":
+    {
+        "shares":
+        [
+            {
+                "name": "we-mp-rss",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-we-mp-rss"
+                    ]
+                }
+            },
+            {
+                "name": "we-mp-rss/data",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-we-mp-rss"
+                    ]
+                }
+            }
+        ]
+    }
+}

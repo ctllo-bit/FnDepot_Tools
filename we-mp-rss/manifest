@@ -1,0 +1,18 @@
+appname               = we-mp-rss
+version               = 1.0.0
+display_name          = 微信公众号订阅
+desc                  = `<div><span>
+默认账号：admin
+默认密码：admin@123 
+
+将公众号内容自动转为标准 RSS 订阅源,通过 Feedly、Inoreader 等 RSS 阅读器统一管理，
+既告别微信刷屏，又实现数据私有可控，堪称 NAS 用户的高效信息管理神器。
+
+</span></div>`
+arch                  = all
+source                = thirdparty
+maintainer            = rachelos
+maintainer_url        = https://github.com/rachelos/we-mp-rss
+distributor           = ctllo-bit
+desktop_uidir         = ui
+desktop_applaunchname = we-mp-rss.Application

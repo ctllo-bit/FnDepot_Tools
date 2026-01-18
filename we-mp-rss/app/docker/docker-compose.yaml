@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  we-mp-rss:
+    image: ghcr.io/rachelos/we-mp-rss:latest
+    container_name: we-mp-rss
+    restart: unless-stopped
+    ports:
+      - "8011:8001"
+    environment:
+      - PUID=1000
+      - PGID=1001
+      - TZ=Asia/Shanghai
+    volumes:
+      - "/var/apps/we-mp-rss/shares/we-mp-rss/data:/app/data"
+    network_mode: bridge

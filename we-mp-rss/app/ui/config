@@ -1,0 +1,13 @@
+{
+    ".url": {
+        "we-mp-rss.Application": {
+            "title": "微信公众号订阅",
+            "icon": "images/icon_{0}.png",
+            "type": "url",
+            "protocol": "http",
+            "port": "8011",
+            "url": "/",
+            "allUsers": false
+        }
+    }
+}

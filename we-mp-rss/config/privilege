@@ -1,0 +1,8 @@
+{
+    "defaults":
+    {
+        "run-as": "package"
+    },
+    "username": "docker-we-mp-rss",
+    "groupname": "docker-we-mp-rss"
+}
