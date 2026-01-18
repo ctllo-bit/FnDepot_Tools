@@ -1,0 +1,28 @@
+{
+    "data-share":
+    {
+        "shares":
+        [
+            {
+                "name": "cpuFind",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "cpuFind"
+                    ]
+                }
+            },
+            {
+                "name": "cpuFind/data",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "cpuFind"
+                    ]
+                }
+            }
+        ]
+    }
+}
