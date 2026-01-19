@@ -6,11 +6,15 @@ services:
     container_name: we-mp-rss
     restart: unless-stopped
     ports:
-      - "8011:8001"
+      - "${wizard_port}:8001"
     environment:
       - PUID=1000
       - PGID=1001
       - TZ=Asia/Shanghai
+      - DB=sqlite:///data/we_mp_rss.db
+      - PASSWORD=admin@123
+      - USERNAME=${wizard_username}
     volumes:
       - "/var/apps/we-mp-rss/shares/we-mp-rss/data:/app/data"
+    shm_size: "512mb"
     network_mode: bridge
