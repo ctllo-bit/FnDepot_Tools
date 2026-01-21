@@ -1,0 +1,14 @@
+appname               = freshrss
+version               = 1.0.0
+display_name          = FreshRSS
+desc                  = `<span>
+FreshRSS 是一个自托管的 RSS 聚合服务。 它不仅轻快易用，并且强大又易于配置。
+
+</span>`
+arch                  = all
+source                = thirdparty
+maintainer            = FreshRSS
+maintainer_url        = https://github.com/FreshRSS/FreshRSS/
+distributor           = ctllo-bit
+desktop_uidir         = ui
+desktop_applaunchname = freshrss.Application
