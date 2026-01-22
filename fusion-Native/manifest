@@ -1,10 +1,16 @@
 appname               = fusion
 version               = 1.0.0
 display_name          = Fusion
-desc                  = app-description
-arch                  = x86_64
+desc                  = `<span>
+默认密码：fusion
+一款轻量级的 RSS 源聚合器和阅读器。
+
+</span>`
+
+arch                  = all
 source                = thirdparty
-maintainer            = your-name
-distributor           = your-name
+maintainer            = 0x2E
+maintainer_url        = https://github.com/0x2E/fusion
+distributor           = ctllo-bit
 desktop_uidir         = ui
 desktop_applaunchname = fusion.Application
