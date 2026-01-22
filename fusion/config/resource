@@ -1,0 +1,38 @@
+{
+    "docker-project":
+    {
+        "projects":
+        [
+            {
+                "name": "fusion",
+                "path": "docker"
+            }
+        ]
+    },
+    "data-share":
+    {
+        "shares":
+        [
+            {
+                "name": "fusion",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-fusion"
+                    ]
+                }
+            },
+            {
+                "name": "fusion/data",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-fusion"
+                    ]
+                }
+            }
+        ]
+    }
+}

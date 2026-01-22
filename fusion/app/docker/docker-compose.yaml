@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  fusion:
+    image: ghcr.io/0x2e/fusion:latest
+    container_name: fusion
+    restart: unless-stopped
+    ports:
+      - "8087:8080"
+    environment:
+      - TZ=Asia/Shanghai
+      - PASSWORD=fusion
+    volumes:
+      - "/var/apps/fusion/shares/fusion/data:/data"

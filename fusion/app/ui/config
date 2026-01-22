@@ -1,0 +1,14 @@
+{
+    ".url": {
+        "fusion.Application": {
+            "title": "RSS 阅读器",
+            "icon": "images/icon_{0}.png",
+            "type": "iframe",
+            "protocol": "http",
+            "port": "8087",
+            "url": "/",
+            "allUsers": false
+        }
+    }
+}
+
