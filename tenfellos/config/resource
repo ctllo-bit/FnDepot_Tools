@@ -1,0 +1,48 @@
+{
+    "docker-project":
+    {
+        "projects":
+        [
+            {
+                "name": "tenfellos",
+                "path": "docker"
+            }
+        ]
+    },
+    "data-share":
+    {
+        "shares":
+        [
+            {
+                "name": "tenfellos",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-tenfellos"
+                    ]
+                }
+            },
+            {
+                "name": "tenfellos/rootPath",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-tenfellos"
+                    ]
+                }
+            },
+            {
+                "name": "tenfellos/apps",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-tenfellos"
+                    ]
+                }
+            }
+        ]
+    }
+}

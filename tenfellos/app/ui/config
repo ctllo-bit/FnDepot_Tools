@@ -1,0 +1,14 @@
+{
+    ".url": {
+        "tenfellos.Application": {
+            "title": "腾飞Webos",
+            "icon": "images/icon_{0}.png",
+            "type": "url",
+            "protocol": "http",
+            "port": "8088",
+            "url": "/",
+            "allUsers": true
+        }
+    }
+}
+

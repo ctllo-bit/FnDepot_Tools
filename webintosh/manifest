@@ -1,0 +1,15 @@
+appname               = webintosh
+version               = 1.0.0
+display_name          = 网页版 macOS
+desc                  = `<div><span>
+默认密码：Ventura / Sonoma / Sequoia
+在浏览器中优雅的体验 macOS Sequoia 界面。
+
+</span></div>`
+arch                  = all
+source                = thirdparty
+maintainer            = Mengobs
+maintainer_url        = https://github.com/Mengobs/Webintosh
+distributor           = ctllo-bit
+desktop_uidir         = ui
+desktop_applaunchname = webintosh.Application

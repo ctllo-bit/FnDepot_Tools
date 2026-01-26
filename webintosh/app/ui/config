@@ -1,0 +1,11 @@
+{
+    ".url": {
+        "webintosh.Application": {
+            "title": "网页版 macOS",
+            "icon": "images/icon_{0}.png",
+            "type": "iframe",
+            "url": "/cgi/ThirdParty/webintosh/index.cgi/",
+            "allUsers": true
+        }
+    }
+}
