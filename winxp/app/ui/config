@@ -1,0 +1,11 @@
+{
+    ".url": {
+        "winxp.Application": {
+            "title": "网页版WinXP",
+            "icon": "images/icon_{0}.png",
+            "type": "iframe",
+            "url": "/cgi/ThirdParty/winxp/index.cgi/",
+            "allUsers": true
+        }
+    }
+}

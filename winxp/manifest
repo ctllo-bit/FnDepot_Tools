@@ -1,0 +1,11 @@
+appname               = winxp
+version               = 1.0.0
+display_name          = 网页版WinXP
+desc                  = 一个网站就能体验WinXP。
+arch                  = all
+source                = thirdparty
+maintainer            = ducbao414
+maintainer_url        = https://docs.win32.run/
+distributor           = ctllo-bit
+desktop_uidir         = ui
+desktop_applaunchname = winxp.Application
