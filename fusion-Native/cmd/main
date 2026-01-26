@@ -1,0 +1,128 @@
+#!/bin/bash
+
+# 日志位置
+LOG_FILE="${TRIM_PKGVAR}/info.log"
+PID_FILE="${TRIM_PKGVAR}/app.pid"
+
+# fusion 启动命令
+CMD="cd ${TRIM_APPDEST}/fusion && exec ./fusion"
+
+log_msg() {
+    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> ${LOG_FILE}
+}
+
+start_process() {
+    if status; then
+        return 0
+    fi
+
+    log_msg "Starting fusion process ..."
+    # 启动 fusion 进程
+    bash -c "${CMD}" >> ${LOG_FILE} 2>&1 &
+    # 写入 PID 到文件
+    printf "%s" "$!" > ${PID_FILE}
+    log_msg "fusion started with PID: $!"
+    return 0
+}
+
+stop_process() {
+    log_msg "Stopping fusion process ..."
+
+    local pid=""
+    
+    # 首先尝试从 PID_FILE 获取 PID
+    if [ -r "${PID_FILE}" ]; then
+        pid=$(head -n 1 "${PID_FILE}" | tr -d '[:space:]')
+        log_msg "pid=${pid} from PID_FILE"
+        
+        # 检查进程是否存在
+        if check_process "${pid}"; then
+            log_msg "Verified process matches CMD"
+        else
+            # 进程不存在或不匹配，删除 pidfile
+            rm -f "${PID_FILE}"
+            log_msg "Process not found or doesn't match by PID_FILE, trying ps aux..."
+            pid=""
+        fi
+    fi
+    
+    # 如果 PID_FILE 方法失败，尝试搜索进程列表
+    if [ -z "${pid}" ]; then
+        pid=$(ps aux | grep -v grep | grep "${TRIM_APPDEST}/fusion" | awk '{print $2}')
+        
+        if [ -z "${pid}" ]; then
+            log_msg "Process not found"
+            rm -f "${PID_FILE}"
+            return 0
+        fi
+        log_msg "Found process with PID: ${pid} from ps aux"
+    fi
+
+    log_msg "send TERM signal to PID:${pid}..."
+    kill -TERM ${pid} >> ${LOG_FILE} 2>&1
+
+    local count=0
+    while check_process "${pid}" && [ $count -lt 10 ]; do
+        sleep 1
+        count=$((count + 1))
+        log_msg "waiting process terminal... (${count}s/10s)"
+    done
+
+    if check_process "${pid}"; then
+        log_msg "send KILL signal to PID:${pid}..."
+        kill -KILL "${pid}" >> ${LOG_FILE} 2>&1
+        sleep 1
+    else
+        log_msg "process killed... "
+    fi
+    
+    # 清理 pidfile
+    rm -f "${PID_FILE}"
+    return 0
+}
+
+check_process() {
+    local pid=$1
+    if [ -n "${pid}" ] && kill -0 "${pid}" 2>/dev/null; then
+        return 0  # 进程存在
+    else
+        return 1  # 进程不存在
+    fi
+}
+
+
+status() {
+    if [ -f "${PID_FILE}" ]; then
+        pid=$(head -n 1 "${PID_FILE}" | tr -d '[:space:]')
+        if check_process "${pid}"; then
+            return 0
+        else
+            # Process is not running but pidfile exists - clean it up
+            rm -f "${PID_FILE}"
+        fi    
+    fi
+
+    return 1
+}
+
+case $1 in
+start)
+    # 运行启动命令。成功退出 0，失败退出 1
+    start_process
+    ;;
+stop)
+    # 运行停止命令。成功退出 0，失败退出 1
+    stop_process
+    ;;
+status)
+    # 检查应用状态命令。运行中退出 0，未运行退出 3
+    if status; then 
+        exit 0
+    else 
+        exit 3
+    fi
+    ;;
+*)
+    exit 1
+    ;;
+esac
