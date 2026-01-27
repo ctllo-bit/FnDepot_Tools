@@ -2,7 +2,7 @@ appname               = tenfellos
 version               = 1.0.0
 display_name          = 腾飞Webos
 desc                  = `<span>
-腾飞ebos是一款免费的个人私有云。
+腾飞Webos是一款免费的个人私有云。
 
 </span>`
 arch                  = all
