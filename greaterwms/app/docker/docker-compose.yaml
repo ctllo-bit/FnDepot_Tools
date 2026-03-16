@@ -1,0 +1,10 @@
+version: "3.8"
+
+services:
+  code-server:
+    image: 1073245193/greaterwms:v1.1
+    container_name: Greaterwms 
+    restart: unless-stopped
+    ports:
+      - "8008:8008"
+    network_mode: bridge

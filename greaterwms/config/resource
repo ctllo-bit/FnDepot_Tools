@@ -1,0 +1,38 @@
+{
+    "docker-project":
+    {
+        "projects":
+        [
+            {
+                "name": "greaterwms",
+                "path": "docker"
+            }
+        ]
+    },
+    "data-share":
+    {
+        "shares":
+        [
+            {
+                "name": "greaterwms",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-greaterwms"
+                    ]
+                }
+            },
+            {
+                "name": "greaterwms/data",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-greaterwms"
+                    ]
+                }
+            }
+        ]
+    }
+}
