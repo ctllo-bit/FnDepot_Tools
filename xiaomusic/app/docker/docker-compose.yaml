@@ -1,0 +1,16 @@
+version: "3.8"
+
+services:
+  xiaomusic:
+    image: hanxi/xiaomusic
+    container_name: xiaomusic
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Shanghai
+      - XIAOMUSIC_PUBLIC_PORT=${wizard_port}
+    volumes:
+      - "${wizard_music_path}:/app/music"
+      - "/var/apps/xiaomusic/shares/xiaomusic/xiaomusic_conf:/app/conf"
+    ports:
+      - "${wizard_port}:8090"
+    network_mode: bridge

@@ -1,0 +1,30 @@
+appname               = xiaomusic
+version               = 1.0.0
+display_name          = XiaoMusic
+desc                  = `<div>XiaoMusic: 无限听歌，解放小爱音箱。<span>
+
+🎵 使用小爱音箱播放音乐，音乐使用 yt-dlp 下载
+
+支持音乐格式
+mp3 - 标准音频格式
+flac - 无损音频格式
+wav - 无损音频格式
+ape - 无损音频格式
+ogg - 开源音频格式
+m4a - AAC 音频格式
+
+🤐 支持语音口令
+基础播放控制
+播放歌曲 - 播放本地的歌曲
+播放歌曲+歌名 - 例如：播放歌曲周杰伦晴天
+上一首 / 下一首 - 切换歌曲
+关机 / 停止播放 - 停止播放
+
+</span></div>`
+arch                  = all
+source                = thirdparty
+maintainer            = hanxi
+maintainer_url        = https://github.com/hanxi/xiaomusic
+distributor           = ctllo-bit
+desktop_uidir         = ui
+desktop_applaunchname = xiaomusic.Application

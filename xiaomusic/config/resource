@@ -1,0 +1,38 @@
+{
+    "docker-project":
+    {
+        "projects":
+        [
+            {
+                "name": "xiaomusic",
+                "path": "docker"
+            }
+        ]
+    },
+    "data-share":
+    {
+        "shares":
+        [
+            {
+                "name": "xiaomusic",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-xiaomusic"
+                    ]
+                }
+            },
+            {
+                "name": "xiaomusic/xiaomusic_conf",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-xiaomusic"
+                    ]
+                }
+            }
+        ]
+    }
+}
