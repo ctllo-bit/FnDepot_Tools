@@ -24,7 +24,7 @@
                 }
             },
             {
-                "name": "greaterwms/data",
+                "name": "greaterwms/postgres_data",
                 "permission":
                 {
                     "rw":

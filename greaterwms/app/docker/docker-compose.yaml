@@ -1,10 +1,39 @@
 version: "3.8"
 
+networks:
+  prod-network:
+    driver: bridge
+
 services:
-  code-server:
-    image: 1073245193/greaterwms:v1.1
-    container_name: Greaterwms 
+  gpostgres:
+    image: postgres:17-alpine
+    container_name: greaterwms_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: greaterwms_data
+      POSTGRES_USER: greaterwms
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - "/var/apps/greaterwms/shares/greaterwms/postgres_data:/var/lib/postgresql/data"
+    networks:
+      - prod-network
+    healthcheck:       
+      test: ["CMD-SHELL", "pg_isready -U greaterwms -d greaterwms_data"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  greaterwms_backend:
+    image: 1073245193/greaterwms:v1.3
+    container_name: greaterwms_backend
     restart: unless-stopped
     ports:
       - "8008:8008"
-    network_mode: bridge
+    networks:
+      - prod-network    
+    depends_on:
+      gpostgres:
+        condition: service_healthy
+    environment:
+      - DATABASE_URL=postgresql://greaterwms:postgres@gpostgres:5432/greaterwms_data
+      - DEBUG=False
