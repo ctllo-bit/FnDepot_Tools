@@ -1,0 +1,18 @@
+appname               = hermes
+version               = 1.0.0
+display_name          = Hermes Agent
+desc                  = `<div>一款可在你的服务器上运行、具备自我迭代能力的 AI 智能体。拥有跨会话持续累积的分层记忆系统、离线状态下仍可触发的定时任务调度器，以及能自动保存可复用执行流程的技能体系。<span>
+
+hermes model    # 选择你的 LLM 提供商和模型
+hermes tools    # 配置每个平台启用哪些工具
+hermes setup    # 完整设置向导（一次性配置所有内容）
+hermes doctor   # 诊断问题
+hermes gateway  # 启动消息网关
+</span></div>`
+platform              = all
+source                = thirdparty
+maintainer            = Nous Research
+maintainer_url        = https://github.com/NousResearch/hermes-agent
+distributor           = ctllo-bit & yuexps
+desktop_uidir         = ui
+desktop_applaunchname = hermes.Application

@@ -1,0 +1,38 @@
+{
+    "docker-project":
+    {
+        "projects":
+        [
+            {
+                "name": "hermes",
+                "path": "docker"
+            }
+        ]
+    },
+    "data-share":
+    {
+        "shares":
+        [
+            {
+                "name": "Hermes-Agent",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-hermes"
+                    ]
+                }
+            },
+            {
+                "name": "Hermes-Agent/data",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-hermes"
+                    ]
+                }
+            }
+        ]
+    }
+}
