@@ -1,0 +1,38 @@
+{
+    "docker-project":
+    {
+        "projects":
+        [
+            {
+                "name": "cpolar",
+                "path": "docker"
+            }
+        ]
+    },
+    "data-share":
+    {
+        "shares":
+        [
+            {
+                "name": "cpolar",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-cpolar"
+                    ]
+                }
+            },
+            {
+                "name": "cpolar/data",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "docker-cpolar"
+                    ]
+                }
+            }
+        ]
+    }
+}
