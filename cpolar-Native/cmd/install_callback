@@ -83,36 +83,26 @@ download_cpolar() {
   return 0
 }
 
+identify_os_arch
+RELEASE_VERSION="3.3.12"
+ZIP_FILE="${TRIM_APPDEST}/cpolar-linux-$MACHINE.zip"
 
+download_cpolar || {
+  exit 1
+}
 
-
-
-main(){
-  identify_os_arch
-  RELEASE_VERSION="3.3.12"
-  ZIP_FILE="${TRIM_APPDEST}/cpolar-linux-$MACHINE.zip"
-
-  download_cpolar || {
+if [[ -s "$ZIP_FILE" ]]; then
+  unzip -q "$ZIP_FILE" -d "${TRIM_APPDEST}/server"  || {
+    log_msg "unzip failed"
     exit 1
   }
+  rm -f "$ZIP_FILE"
+  log_msg "Cpola archive unzipped successfully: ${TRIM_APPDEST}/server"
+fi
 
-  if [[ -s "$ZIP_FILE" ]]; then
-    unzip -q "$ZIP_FILE" -d "${TRIM_APPDEST}/server"  || {
-      log_msg "unzip failed"
-      exit 1
-    }
-    rm -f "$ZIP_FILE"
-    log_msg "Cpola archive unzipped successfully: ${TRIM_APPDEST}/server"
-  fi
-
-  CONFIG_FILE="/var/apps/cpolar/etc/cpolar.yml"
-  cat > "$CONFIG_FILE" <<'EOF'
+CONFIG_FILE="/var/apps/cpolar/etc/cpolar.yml"
+cat > "$CONFIG_FILE" <<'EOF'
 authtoken: 
-client_dashboard_addr: 127.0.0.1:9300
-
-log_level: info
-log_format: json
-log: /var/apps/cpolar/var/cpolar.log
 
 tunnels:
   website:
@@ -122,19 +112,5 @@ tunnels:
     proto: tcp
     addr: 22
 EOF
-
-
-
-
-
-  
-
-  # log_msg "install completed"
-}
-
-
-
-main
-
 
 exit 0
