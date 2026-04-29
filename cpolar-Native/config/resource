@@ -1,0 +1,28 @@
+{
+    "data-share":
+    {
+        "shares":
+        [
+            {
+                "name": "cpolar",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "cpolar"
+                    ]
+                }
+            },
+            {
+                "name": "cpolar/data",
+                "permission":
+                {
+                    "rw":
+                    [
+                        "cpolar"
+                    ]
+                }
+            }
+        ]
+    }
+}
