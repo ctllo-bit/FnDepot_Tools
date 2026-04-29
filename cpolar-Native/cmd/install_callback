@@ -6,76 +6,76 @@ log_msg() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> ${LOG_FILE}
 }
 
-curl() {
+download_with_retry() {
   command curl -L -sS --retry 5 --retry-delay 10 --retry-max-time 60 "$@"
 }
 
 identify_os_arch() {
-  if [[ "$(uname)" == 'Linux' ]]; then
-    case "$(uname -m)" in
-      'i386' | 'i686')
-        MACHINE='386'
-        ;;
-      'amd64' | 'x86_64')
-        MACHINE='amd64'
-        ;;
-      'armv5tel')
-        MACHINE='arm'
-        ;;
-      'armv6l')
-        MACHINE='arm'
-        grep Features /proc/cpuinfo | grep -qw 'vfp' || MACHINE='arm'
-        ;;
-      'armv7' | 'armv7l')
-        MACHINE='arm'
-        grep Features /proc/cpuinfo | grep -qw 'vfp' || MACHINE='arm'
-        ;;
-      'armv8' | 'aarch64')
-        MACHINE='arm64'
-        ;;
-      'mips')
-        MACHINE='mips'
-        ;;
-      'mipsle')
-        MACHINE='mipsle'
-        ;;
-      'mips64')
-        MACHINE='mips64'
-        ;;
-      'mips64le')
-        MACHINE='mips64le'
-        ;;
-      'ppc64')
-        MACHINE='ppc64'
-        ;;
-      'ppc64le')
-        MACHINE='ppc64le'
-        ;;
-      'riscv64')
-        MACHINE='riscv64'
-        ;;
-      's390x')
-        MACHINE='s390x'
-        ;;
-      *)
-        log_msg "error: The architecture is not supported."
-        exit 1
-        ;;
-    esac
-    if [[ ! -f '/etc/os-release' ]]; then
-      log_msg "error: Don't use outdated Linux distributions."
-      exit 1
-    fi
-  else
-    log_msg "error: This operating system is not supported."
+  [[ "$(uname)" != "Linux" ]] && {
+    log_msg "error: Only Linux is supported"
     exit 1
-  fi
+  }
+  case "$(uname -m)" in
+    'i386' | 'i686')
+      MACHINE='386'
+      ;;
+    'amd64' | 'x86_64')
+      MACHINE='amd64'
+      ;;
+    'armv5tel')
+      MACHINE='arm'
+      ;;
+    'armv6l')
+      MACHINE='arm'
+      grep Features /proc/cpuinfo | grep -qw 'vfp' || MACHINE='arm'
+      ;;
+    'armv7' | 'armv7l')
+      MACHINE='arm'
+      grep Features /proc/cpuinfo | grep -qw 'vfp' || MACHINE='arm'
+      ;;
+    'armv8' | 'aarch64')
+      MACHINE='arm64'
+      ;;
+    'mips')
+      MACHINE='mips'
+      ;;
+    'mipsle')
+      MACHINE='mipsle'
+      ;;
+    'mips64')
+      MACHINE='mips64'
+      ;;
+    'mips64le')
+      MACHINE='mips64le'
+      ;;
+    'ppc64')
+      MACHINE='ppc64'
+      ;;
+    'ppc64le')
+      MACHINE='ppc64le'
+      ;;
+    'riscv64')
+      MACHINE='riscv64'
+      ;;
+    's390x')
+      MACHINE='s390x'
+      ;;
+    *)
+      log_msg "error: The architecture is not supported."
+      exit 1
+      ;;
+    esac
+  [[ ! -f /etc/os-release ]] && {
+    log_msg "error: Missing /etc/os-release"
+    exit 1
+  }
 }
 
 download_cpolar() {
   DOWNLOAD_LINK="http://www.cpolar.com/static/downloads/releases/$RELEASE_VERSION/cpolar-stable-linux-$MACHINE.zip"
   log_msg "Downloading Cpolar archive: $DOWNLOAD_LINK"
-  if ! curl -R -H 'Cache-Control: no-cache' -o "$ZIP_FILE" "$DOWNLOAD_LINK"; then
+
+  if ! download_with_retry -R -H 'Cache-Control: no-cache' -o "$ZIP_FILE" "$DOWNLOAD_LINK"; then
     log_msg 'error: Download failed! Please check your network or try again.'
     return 1
   fi
@@ -83,20 +83,7 @@ download_cpolar() {
   return 0
 }
 
-decompression() {
-CONFIG_FILE="/var/apps/cpolar/etc/cpolar.yml"
-cat > "$CONFIG_FILE" <<'EOF'
-authtoken: 
 
-tunnels:
-  website:
-    addr: 8080
-    proto: http
-  ssh:
-    proto: tcp
-    addr: 22
-EOF
-}
 
 
 
@@ -108,7 +95,7 @@ main(){
   download_cpolar || {
     exit 1
   }
-  
+
   if [[ -s "$ZIP_FILE" ]]; then
     unzip -q "$ZIP_FILE" -d "${TRIM_APPDEST}/server"  || {
       log_msg "unzip failed"
@@ -118,12 +105,31 @@ main(){
     log_msg "Cpola archive unzipped successfully: ${TRIM_APPDEST}/server"
   fi
 
+  CONFIG_FILE="/var/apps/cpolar/etc/cpolar.yml"
+  cat > "$CONFIG_FILE" <<'EOF'
+authtoken: 
+client_dashboard_addr: 127.0.0.1:9300
 
-  decompression
+log_level: info
+log_format: json
+log: /var/apps/cpolar/var/cpolar.log
+
+tunnels:
+  website:
+    addr: 8080
+    proto: http
+  ssh:
+    proto: tcp
+    addr: 22
+EOF
+
+
+
+
 
   
 
-  log_msg "install completed"
+  # log_msg "install completed"
 }
 
 

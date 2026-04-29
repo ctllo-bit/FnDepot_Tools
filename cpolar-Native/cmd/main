@@ -3,10 +3,11 @@
 LOG_FILE="${TRIM_PKGVAR}/info.log"
 PID_FILE="${TRIM_PKGVAR}/app.pid"
 
-export HOME=/var/apps/cpolar/home
+export HOME=/var/apps/cpolar/etc
 export PATH=/var/apps/cpolar/target/server:$PATH
 
-CMD="cpolar start-all -dashboard=on -daemon=on -config=/var/apps/cpolar/etc/cpolar.yml -log=/var/apps/cpolar/var/access.log"
+CMD="cpolar start-all -dashboard=on -daemon=on -config=/var/apps/cpolar/etc/cpolar.yml "
+# CMD=""
 
 log_msg() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> ${LOG_FILE}
