@@ -1,10 +1,10 @@
 appname               = cpolar
 version               = 1.0.0
-display_name          = display-name
-desc                  = app-description
-arch                  = x86_64
+display_name          = cpolar极点云
+desc                  = cpolar是一款安全的内网穿透工具，适合微信公众号开发调试，Web开发，OpenAPI开发，webhook开发和调试工具。只需一行命令，就可以将内网站点发布至公网，方便给客户演示。
+arch                  = all
 source                = thirdparty
-maintainer            = your-name
-distributor           = your-name
+maintainer            = cpolar
+distributor           = ctllo-bit
 desktop_uidir         = ui
 desktop_applaunchname = cpolar.Application
