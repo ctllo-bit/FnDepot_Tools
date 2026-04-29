@@ -114,8 +114,9 @@ main(){
       log_msg "unzip failed"
       exit 1
     }
+    rm -f "$ZIP_FILE"
+    log_msg "Cpola archive unzipped successfully: ${TRIM_APPDEST}/server"
   fi
-  # rm -f "$ZIP_FILE"
 
 
   decompression
