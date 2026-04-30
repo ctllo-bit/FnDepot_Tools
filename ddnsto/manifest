@@ -1,0 +1,9 @@
+appname        = ddnsto
+version        = 1.0.0
+display_name   = DDNSTO
+desc           = 简单、快速的内网穿透工具，不受网络限制，全局掌控您的私人设备。
+arch           = all
+source         = thirdparty
+maintainer     = DDNSTO
+maintainer_url = https://www.kooldns.cn/
+distributor    = ctllo-bit
