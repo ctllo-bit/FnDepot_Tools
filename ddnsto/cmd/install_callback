@@ -1,6 +1,6 @@
 #!/bin/bash
 LOG_FILE="${TRIM_PKGVAR}/info.log"
-INSTALL_TARGETDIR="${TRIM_APPDEST}/server"
+INSTALL_TARGETDIR="/var/apps/ddnsto/target/server"
 
 log_msg() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> ${LOG_FILE}
@@ -21,31 +21,15 @@ case "${TRIM_SYS_ARCH}" in
         ;;
 esac
 
-download_ddnsto() {
-    local DICT_URL="https://fw.koolcenter.com/binary/ddnsto/linux/ddnsto.$ARCH"
-    log_msg "准备下载: ${DICT_URL}"
+DICT_URL="https://fw.koolcenter.com/binary/ddnsto/linux/ddnsto.$ARCH"
+log_msg "准备下载: ${DICT_URL}"
 
-    wget -c "$DICT_URL" --show-progress || {
-        log_msg "下载失败"
-        return 1
-    }
-    log_msg "下载完成: ${INSTALL_TARGETDIR}/$DICT_FILE"
-
-    return 0
-}
-
-log_msg "开始安装 ddnsto"
-
-mkdir -p /var/apps/ddnsto/target/server
-cd $INSTALL_TARGETDIR || {
-    log_msg "无法进入 ${INSTALL_TARGETDIR}"
-    exit 1
-}
-
-download_ddnsto || {
+mkdir -p "${INSTALL_TARGETDIR}" && cd ${INSTALL_TARGETDIR}
+wget -c "$DICT_URL" --show-progress || {
     log_msg "下载 ddnsto 失败"
     exit 1
 }
+log_msg "下载完成: ${INSTALL_TARGETDIR}/$DICT_FILE"
 
 mv "ddnsto.${ARCH}" "ddnsto"
 chmod +x "ddnsto"

@@ -3,9 +3,8 @@
 LOG_FILE="${TRIM_PKGVAR}/info.log"
 PID_FILE="${TRIM_PKGVAR}/app.pid"
 
-export PATH=/var/apps/ddnsto/target/server:$PATH
-
-CMD="ddnsto -u ${wizard_token}"
+# write the command to start your program here 
+CMD="/var/apps/ddnsto/target/server/ddnsto -u ${wizard_token} "
 
 log_msg() {
     echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> ${LOG_FILE}
