@@ -1,0 +1,27 @@
+#!/bin/bash
+
+#获取处理器架构
+ARCH=""
+case "${TRIM_SYS_ARCH}" in
+    x86_64|x86)
+        ARCH="amd64"
+        ;;
+    aarch64|arm)
+        ARCH="arm64"
+        ;;
+    armv7l|armv7)
+        ARCH="armv7l"
+        ;;
+    *)
+        log_msg "不支持的架构: $TRIM_SYS_ARCH"
+        exit 1
+        ;;
+esac
+
+cd ${TRIM_APPDEST}/server/
+
+tar -xzf natpierce-$ARCH-*.tar.gz
+rm natpierce-*.tar.gz
+
+
+exit 0

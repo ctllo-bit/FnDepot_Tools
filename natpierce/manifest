@@ -1,0 +1,11 @@
+appname               = natpierce
+version               = 1.0.0
+display_name          = 皎月内网穿透
+desc                  = 数据无中转，不限速，真正的点对点直连内网穿透。
+arch                  = all
+source                = thirdparty
+maintainer            = natpierce
+maintainer_url        = https://www.natpierce.cn/
+distributor           = ctllo-bit
+desktop_uidir         = ui
+desktop_applaunchname = natpierce.Application
