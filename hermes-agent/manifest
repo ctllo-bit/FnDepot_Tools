@@ -13,6 +13,6 @@ platform              = all
 source                = thirdparty
 maintainer            = Nous Research
 maintainer_url        = https://github.com/NousResearch/hermes-agent
-distributor           = ctllo-bit & yuexps
+distributor           = ctllo-bit
 desktop_uidir         = ui
 desktop_applaunchname = hermes.Application
